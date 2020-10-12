@@ -12,7 +12,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.datafix.TypeReferences;
 import net.minecraft.util.registry.Registry;
 
-public class Registerer {
+public class NewRegistry {
 
 	public static Item registerItem(Item item, ResourceLocation resourceLocation) {
 		return registerItem(resourceLocation, item);

@@ -5,6 +5,8 @@ import com.mojang.datafixers.types.Type;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
@@ -24,6 +26,14 @@ public class NewRegistry {
 	
 	public static <T extends TileEntity> TileEntityType<T> registerTileEntityType(TileEntityType.Builder<T> builder, ResourceLocation resourceLocation) {
 		return registerTileEntity(resourceLocation.toString(), builder);
+	}
+	
+	public static Effect registerEffect(Effect effect, ResourceLocation key) {
+		return Registry.register(Registry.EFFECTS, key, effect);
+	}
+	
+	public static Potion registerPotion(Potion potion, ResourceLocation key) {
+		return Registry.register(Registry.POTION, key, potion);
 	}
 
 	private static Item registerItem(ResourceLocation key, Item itemIn) {

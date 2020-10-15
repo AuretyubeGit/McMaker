@@ -1,4 +1,4 @@
-package ex.examplemod.mod.tiles;
+package ex.examplemod.mod.tile;
 
 import javax.annotation.Nullable;
 

@@ -3,7 +3,7 @@ package ex.examplemod.mod.util;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import ex.examplemod.mod.tiles.QuarryTileEntity;
+import ex.examplemod.mod.tile.QuarryTileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

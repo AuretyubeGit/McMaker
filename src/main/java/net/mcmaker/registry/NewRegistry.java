@@ -1,8 +1,13 @@
 package net.mcmaker.registry;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.mojang.datafixers.types.Type;
 
+import net.mcmaker.keyBindingEvent.KeyBindingEvent;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -21,6 +26,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.datafix.TypeReferences;
 import net.minecraft.util.registry.Registry;
 
+@SuppressWarnings("resource")
 public class NewRegistry {
 
 	public static Item registerItem(Item item, ResourceLocation resourceLocation) {
@@ -63,6 +69,21 @@ public class NewRegistry {
 
 	public static <E extends Entity> EntityType<E> registerEntityType(EntityType<E> entityType, ResourceLocation key) {
 		return Registry.register(Registry.ENTITY_TYPE, key, entityType);
+	}
+
+	public static void registerKeyBinding(KeyBinding keyBinding) {
+		(Minecraft.getInstance().gameSettings.keyBindings) = (KeyBinding[]) ArrayUtils
+				.add((Object[]) (Minecraft.getInstance()).gameSettings.keyBindings, keyBinding);
+	}
+
+	public static void registerKeyBindingCategory(String categoryKey) {
+		int index = 8;
+		KeyBinding.CATEGORY_ORDER.put(categoryKey, index);
+		index++;
+	}
+
+	public static KeyBindingEvent registerKeyBindingEvent(KeyBindingEvent keyBindingEvent, ResourceLocation key) {
+		return NewRegistries.register(NewRegistries.KEY_BINDING_EVENT, key, keyBindingEvent);
 	}
 
 	private static Item registerItem(ResourceLocation key, Item itemIn) {

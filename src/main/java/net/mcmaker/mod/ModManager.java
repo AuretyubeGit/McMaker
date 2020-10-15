@@ -54,18 +54,21 @@ public class ModManager {
 		try (Stream<Path> walk = Files.walk(Paths.get(foalder.getAbsolutePath()))) {
 			List<String> paths = walk.map(x -> x.toString()).filter(f -> f.endsWith(".jar"))
 					.collect(Collectors.toList());
-			File file = new File(workingModPropertiesPath);
-			if (file.exists()) {
-				ModProperties properties = new ModProperties();
-				properties.readPropertiesFile(file);
-				Class<?> c;
-				try {
-					c = Class.forName(properties.getMainClasspath());
-					properties.setMainClassObject(c);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
+			
+			if(workingModPropertiesPath != null) {
+				File file = new File(workingModPropertiesPath);
+				if (file.exists()) {
+					ModProperties properties = new ModProperties();
+					properties.readPropertiesFile(file);
+					Class<?> c;
+					try {
+						c = Class.forName(properties.getMainClasspath());
+						properties.setMainClassObject(c);
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					mods.put(properties.getModid(), properties);
 				}
-				mods.put(properties.getModid(), properties);
 			}
 			paths.forEach((path) -> {
 				try (JarFile jarFile = new JarFile(path)) {

@@ -1,8 +1,8 @@
-package ex.examplemod.mod.blocks;
+package ex.examplemod.mod.block;
 
 import javax.annotation.Nullable;
 
-import ex.examplemod.mod.tiles.QuarryTileEntity;
+import ex.examplemod.mod.tile.QuarryTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;

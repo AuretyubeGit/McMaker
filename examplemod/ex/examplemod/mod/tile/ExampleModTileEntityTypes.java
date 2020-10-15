@@ -1,7 +1,7 @@
-package ex.examplemod.mod.tiles;
+package ex.examplemod.mod.tile;
 
 import ex.examplemod.mod.ExampleMod;
-import ex.examplemod.mod.blocks.ExampleModBlocks;
+import ex.examplemod.mod.block.ExampleModBlocks;
 import net.mcmaker.registry.NewRegistry;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;

@@ -1,4 +1,4 @@
-package ex.examplemod.mod.blocks;
+package ex.examplemod.mod.block;
 
 import net.minecraft.block.Block;
 

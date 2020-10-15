@@ -1,4 +1,4 @@
-package ex.examplemod.mod.items;
+package ex.examplemod.mod.item;
 
 import net.mcmaker.registry.NewRegistry;
 import net.minecraft.item.Item;

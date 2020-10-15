@@ -4,6 +4,8 @@ import com.mojang.datafixers.types.Type;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
@@ -28,33 +30,39 @@ public class NewRegistry {
 	public static Block registerBlock(Block block, ResourceLocation resourceLocation) {
 		return Registry.register(Registry.BLOCK, resourceLocation, block);
 	}
-	
-	public static <T extends TileEntity> TileEntityType<T> registerTileEntityType(TileEntityType.Builder<T> builder, ResourceLocation resourceLocation) {
+
+	public static <T extends TileEntity> TileEntityType<T> registerTileEntityType(TileEntityType.Builder<T> builder,
+			ResourceLocation resourceLocation) {
 		return registerTileEntity(resourceLocation.toString(), builder);
 	}
-	
+
 	public static Effect registerEffect(Effect effect, ResourceLocation key) {
 		return Registry.register(Registry.EFFECTS, key, effect);
 	}
-	
+
 	public static Potion registerPotion(Potion potion, ResourceLocation key) {
 		return Registry.register(Registry.POTION, key, potion);
 	}
-	
-	public static ContainerType<?> registerContainerType(ContainerType<? extends Container> containerType,ResourceLocation key) {
+
+	public static ContainerType<?> registerContainerType(ContainerType<? extends Container> containerType,
+			ResourceLocation key) {
 		return Registry.register(Registry.CONTAINER_TYPE, key, containerType);
 	}
-	
+
 	public static SoundEvent registerSoundEvent(SoundEvent soundEvent, ResourceLocation key) {
 		return Registry.register(Registry.SOUND_EVENT, key, soundEvent);
 	}
-	
+
 	public static Enchantment registerEnchantment(Enchantment enchantment, ResourceLocation key) {
 		return Registry.register(Registry.ENCHANTMENT, key, enchantment);
 	}
-	
+
 	public static Fluid registerFluid(Fluid fluid, ResourceLocation key) {
 		return Registry.register(Registry.FLUID, key, fluid);
+	}
+
+	public static <E extends Entity> EntityType<E> registerEntityType(EntityType<E> entityType, ResourceLocation key) {
+		return Registry.register(Registry.ENTITY_TYPE, key, entityType);
 	}
 
 	private static Item registerItem(ResourceLocation key, Item itemIn) {
@@ -64,7 +72,8 @@ public class NewRegistry {
 		return Registry.register(Registry.ITEM, key, itemIn);
 	}
 
-	private static <T extends TileEntity> TileEntityType<T> registerTileEntity(String key, TileEntityType.Builder<T> builder) {
+	private static <T extends TileEntity> TileEntityType<T> registerTileEntity(String key,
+			TileEntityType.Builder<T> builder) {
 		if (builder.blocks.isEmpty()) {
 			System.err.println("Block entity type " + key + " requires at least one valid block to be defined!");
 		}
@@ -72,5 +81,4 @@ public class NewRegistry {
 		Type<?> type = Util.func_240976_a_(TypeReferences.BLOCK_ENTITY, key);
 		return Registry.register(Registry.BLOCK_ENTITY_TYPE, key, builder.build(type));
 	}
-
 }

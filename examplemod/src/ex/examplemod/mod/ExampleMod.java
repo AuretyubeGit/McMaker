@@ -1,6 +1,7 @@
 package ex.examplemod.mod;
 
 import ex.examplemod.mod.block.ExampleModBlocks;
+import ex.examplemod.mod.commands.ExampleModCommands;
 import ex.examplemod.mod.item.ExampleModItems;
 import ex.examplemod.mod.keyBinding.ExampleModKeyBindings;
 import ex.examplemod.mod.keyBinding.event.ExampleModKeyBindingEvents;
@@ -24,6 +25,7 @@ public class ExampleMod {
 		ExampleModKeyBindings.registerKeyBindingsCategories();
 		ExampleModKeyBindings.registerKeyBindings();
 		ExampleModKeyBindingEvents.registerKeyBindingEvents();
+		ExampleModCommands.registerCommands();
 	}
 	
 }

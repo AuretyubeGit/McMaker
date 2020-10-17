@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.mojang.datafixers.types.Type;
 
+import net.mcmaker.command.NewCommand;
 import net.mcmaker.keyBindingEvent.KeyBindingEvent;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -84,6 +85,10 @@ public class NewRegistry {
 
 	public static KeyBindingEvent registerKeyBindingEvent(KeyBindingEvent keyBindingEvent, ResourceLocation key) {
 		return NewRegistries.register(NewRegistries.KEY_BINDING_EVENT, key, keyBindingEvent);
+	}
+	
+	public static NewCommand registerCommand(NewCommand command, ResourceLocation key) {
+		return NewRegistries.register(NewRegistries.COMMAND, key, command);
 	}
 
 	private static Item registerItem(ResourceLocation key, Item itemIn) {

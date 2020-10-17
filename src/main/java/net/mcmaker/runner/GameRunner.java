@@ -22,19 +22,21 @@ public class GameRunner {
         list.put("version", "mcp");
         list.put("assetIndex", "1.16");
         list.put("userProperties", "{}");
-        list.put("userType", "mojang");
         if(list.hasValue("email") && list.hasValue("password")) {
         	try {
 				UserAuthentication auth = tryLogin(list.get("email"), list.get("password"));
 				list.put("username", auth.getSelectedProfile().getName());
 				list.put("uuid", auth.getSelectedProfile().getId().toString().replace("-", ""));
 				list.put("accessToken", auth.getAuthenticatedToken());
+		        list.put("userType", "mojang");
 				list.remove("email");
 				list.remove("password");
 				Main.main(list.getArguments());
 			} catch (AuthenticationException e) {
 				e.printStackTrace();
 			}
+        } else {
+        	Main.main(list.getArguments());
         }
 	}
 	

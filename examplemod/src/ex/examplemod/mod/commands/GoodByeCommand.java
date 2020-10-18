@@ -8,6 +8,7 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 
+@SuppressWarnings("resource")
 public class GoodByeCommand extends NewCommand {
 
 	@Override
@@ -17,6 +18,7 @@ public class GoodByeCommand extends NewCommand {
 			player.setPosition(player.getPosX(), player.getPosY() + 200, player.getPosZ());
 			return 1;
 		}));
+		
 	}
 
 }

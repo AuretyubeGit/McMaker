@@ -16,6 +16,9 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -26,6 +29,7 @@ public class ModManager {
 	private static final ModManager INSTANCE = new ModManager();
 	private Map<String, ModProperties> mods = Maps.newHashMap();
 	private String workingModPropertiesPath;
+	public static final Logger LOGGER = LogManager.getLogger("ModManager");
 
 	public void init(Minecraft mc) {
 		mods.put("minecraft", ModProperties.MINECRAFT_MOD_PROPERTIES);
@@ -33,6 +37,7 @@ public class ModManager {
 	}
 
 	public void callModsConstructor() {
+		LOGGER.info("Initialize Mods");
 		mods.forEach((modId, properties) -> {
 			if (modId.equals("minecraft"))
 				return;
@@ -87,12 +92,11 @@ public class ModManager {
 					e.printStackTrace();
 				}
 			});
-			System.out.println("////////////////////////////////");
-			System.out.println("McMaker Found " + mods.size() + " Mods:");
-			mods.forEach((modId, modProperties) -> System.out.println(modId + " Properties: {mainClass="
+			LOGGER.info("////////////////////////////////");
+			LOGGER.info("McMaker Found " + mods.size() + " Mods:");
+			mods.forEach((modId, modProperties) -> LOGGER.info(modId + " Properties: {mainClass="
 					+ modProperties.getMainClasspath() + ",modId=" + modProperties.getModid() + "}"));
-			System.out.println("////////////////////////////////");
-
+			LOGGER.info("////////////////////////////////");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -147,5 +151,4 @@ public class ModManager {
 			return;
 		this.workingModPropertiesPath = modPropertiesPath;
 	}
-
 }

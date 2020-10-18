@@ -9,6 +9,7 @@ import ex.examplemod.mod.tile.ExampleModTileEntityTypes;
 import net.mcmaker.mod.Mod;
 import net.minecraft.client.Minecraft;
 
+@SuppressWarnings("resource")
 @Mod(modid = ExampleMod.MODID)
 public class ExampleMod {
 	

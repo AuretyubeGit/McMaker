@@ -4,7 +4,7 @@
 
 ------
 
-McMaker is a **Minecraft a mod loader **!
+McMaker is a **Minecraft a mod loader** !
 
 Use: MCP-Reborn by Hexeption
 

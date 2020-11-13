@@ -24,11 +24,11 @@ import com.google.common.collect.Maps;
 
 import net.minecraft.client.Minecraft;
 
-public class ModManager {
+public class ModLoader {
 
-	private static final ModManager INSTANCE = new ModManager();
+	private static final ModLoader INSTANCE = new ModLoader();
 	private Map<String, ModProperties> mods = Maps.newHashMap();
-	private String workingModPropertiesPath;
+	public String workingModPropertiesPath;
 	public static final Logger LOGGER = LogManager.getLogger("ModManager");
 
 	public void init(Minecraft mc) {
@@ -36,7 +36,7 @@ public class ModManager {
 		listMods(mc);
 	}
 
-	public void callModsConstructor() {
+	public void construcMods() {
 		LOGGER.info("Initialize Mods");
 		mods.forEach((modId, properties) -> {
 			if (modId.equals("minecraft"))
@@ -63,7 +63,7 @@ public class ModManager {
 			if(workingModPropertiesPath != null) {
 				File file = new File(workingModPropertiesPath);
 				if (file.exists()) {
-					ModProperties properties = new ModProperties();
+					ModProperties properties = new ModProperties(file);
 					properties.readPropertiesFile(file);
 					Class<?> c;
 					try {
@@ -77,7 +77,7 @@ public class ModManager {
 			}
 			paths.forEach((path) -> {
 				try (JarFile jarFile = new JarFile(path)) {
-					ModProperties properties = new ModProperties();
+					ModProperties properties = new ModProperties(new File(path));
 					properties.readPropertiesFile(jarFile.getInputStream(jarFile.getEntry("mod.properties")));
 					Class<?> modClass = findModClass(path, jarFile, properties);
 					if (!modClass.isAnnotationPresent(Mod.class)) {
@@ -92,11 +92,11 @@ public class ModManager {
 					e.printStackTrace();
 				}
 			});
-			LOGGER.info("////////////////////////////////");
+			LOGGER.info("////////////// Mods (" + mods.size() + ") //////////////");
 			LOGGER.info("McMaker Found " + mods.size() + " Mods:");
 			mods.forEach((modId, modProperties) -> LOGGER.info(modId + " Properties: {mainClass="
 					+ modProperties.getMainClasspath() + ",modId=" + modProperties.getModid() + "}"));
-			LOGGER.info("////////////////////////////////");
+			LOGGER.info("////////////////////////////////////");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -125,7 +125,7 @@ public class ModManager {
 		return null;
 	}
 
-	public static ModManager get() {
+	public static ModLoader get() {
 		return INSTANCE;
 	}
 
@@ -133,7 +133,7 @@ public class ModManager {
 		return mods;
 	}
 
-	public String[] getNameSpacesWithCustomModids() {
+	public String[] getModids() {
 		List<String> namespaces = Lists.newArrayList();
 		namespaces.add("minecraft");
 		namespaces.add("realms");

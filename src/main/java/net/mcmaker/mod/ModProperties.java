@@ -15,6 +15,11 @@ public class ModProperties {
 	public static final ModProperties MINECRAFT_MOD_PROPERTIES = createMinecraftModProperties();
 	public Map<String, String> properties = Maps.newHashMap();
 	private Class<?> mainClassObject;
+	private File modFile;
+	
+	public ModProperties(final File modFile) {
+		this.modFile = modFile;
+	}
 	
 	public void readPropertiesFile(InputStream propertiesFileInput) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(propertiesFileInput));
@@ -59,7 +64,7 @@ public class ModProperties {
 	}
 	
 	private static ModProperties createMinecraftModProperties() {
-		ModProperties mcProps = new ModProperties();
+		ModProperties mcProps = new ModProperties(null);
 		mcProps.properties.put("mainClass", "net.minecraft.client.main.Main");
 		mcProps.properties.put("modId", "minecraft");
 		return mcProps;
@@ -71,6 +76,10 @@ public class ModProperties {
 	
 	public String getModid() {
 		return properties.get("modId");
+	}
+	
+	public File getModFile() {
+		return modFile;
 	}
 
 	public void setMainClassObject(Class<?> modClass) {

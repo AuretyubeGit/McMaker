@@ -8,7 +8,7 @@ import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 
-import net.mcmaker.mod.ModManager;
+import net.mcmaker.mod.ModLoader;
 import net.minecraft.client.main.Main;
 
 public class GameRunner {
@@ -16,7 +16,7 @@ public class GameRunner {
 	public static void main(String... args) {
 		String assets = System.getenv().containsKey("assetDirectory") ? System.getenv("assetDirectory") : "assets";
 		String modPropsPath = System.getenv().containsKey("modPropertiesPath") ? System.getenv("modPropertiesPath") : "";
-		ModManager.get().addWorkingModPath(modPropsPath);
+		ModLoader.get().addWorkingModPath(modPropsPath);
         ArgumentList list = ArgumentList.from(args);
         list.putLazy("assetsDir", assets);
         list.put("version", "mcp");
